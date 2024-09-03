@@ -8,7 +8,12 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm
 
-# Create your views here.
+
+def landing_page(request):
+    context = {}
+    return render(request, "landing_page.html", context)
+
+
 def login_page(request):
     context = {"login_form": LoginForm()}
     if request.method == "POST":
