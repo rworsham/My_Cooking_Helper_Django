@@ -35,3 +35,7 @@ def login_page(request):
     else:
         login_form = LoginForm()
         return render(request, "login.html", context)
+
+def dashboard(request):
+    context = {}
+    return render(request, "dashboard.html", context)
