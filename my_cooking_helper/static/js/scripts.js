@@ -14,4 +14,16 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    var shiftDiv = document.getElementById('menu-toggle');
+
+    if (shiftDiv) {
+        shiftDiv.addEventListener('click', function() {
+            var viewportWidth = window.innerWidth;
+
+            if (viewportWidth < 1000) {
+                this.classList.toggle('shifted');
+            }
+        });
+    }
 });
