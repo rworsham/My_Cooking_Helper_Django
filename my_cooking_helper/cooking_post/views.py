@@ -14,6 +14,11 @@ def landing_page(request):
     return render(request, "landing_page.html", context)
 
 
+def recipes(request):
+    context = {}
+    return render(request, "recipes.html", context)
+
+
 def login_page(request):
     context = {"login_form": LoginForm()}
     if request.method == "POST":

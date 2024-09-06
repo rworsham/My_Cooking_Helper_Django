@@ -164,6 +164,7 @@ body {
 .featured-section {
     padding: 40px 0;
     background-color: #FFFFFF;
+    border: 2px solid #9EB8D9;
 }
 .featured-section h2 {
     text-align: center;
@@ -267,4 +268,10 @@ body {
 }
 .shifted {
     transform: translateX(250px);
+}
+.card-section {
+    padding: 20px;
+}
+.search-bar {
+    padding: 40px;
 }
