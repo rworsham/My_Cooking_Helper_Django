@@ -11,7 +11,6 @@ def contact(request):
         if contact_form.is_valid():
             message = f"""
 Name: {contact_form.cleaned_data['name']}
-Phone: {contact_form.cleaned_data['phone']}
 Email: {contact_form.cleaned_data['email']}
 
 {contact_form.cleaned_data['message']}
