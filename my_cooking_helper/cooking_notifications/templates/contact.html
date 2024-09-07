@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Contact page for Yeti Hauling Freight" />
+    <meta name="author" content="Your Name" />
+    <title>Contact Us</title>
+    <link rel="icon" href="{% static 'assets/favicon.svg' %}" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playwrite+CU:wght@200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+{% load crispy_forms_tags %}
+    <header class="header bg-dark text-light">
+        <div class="container">
+            <div id="menu-toggle" class="menu-toggle">
+                <i class="bi bi-list" style="font-size: 48px; color: #7C93C3;"></i>
+            </div>
+            <div class="title-center playwrite-cu-title">
+                <a href="{% url 'cooking_post:landing' %}" class="text-light">My Cooking Helper</a>
+            </div>
+        </div>
+    </header>
+    <div id="sidebar" class="sidebar playwrite-cu-title">
+        <div class="logo">&nbsp;My Cooking Helper</div>
+        <a href="{% url 'cooking_post:landing' %}" class="sidebar-active">Home</a>
+        <a href="#">Contact</a>
+    </div>
+    <div id="main-content" class="main-content" style="padding-top: 60px;">
+        <section class="hero-section py-5 bg-light">
+            <div class="container">
+                <div class="text-center mb-5">
+                    {% if msg_sent %}
+                    <h1 class="playwrite-cu-title">Message Sent!</h1>
+                    <p class="lead fw-normal text-muted">Let's talk soon!</p>
+                    {% else %}
+                    <h1 class="playwrite-cu-title">Get in Touch</h1>
+                    <p class="lead fw-normal text-muted">Let's work together!</p>
+                    {% endif %}
+                </div>
+                {% if not msg_sent %}
+                <div class="row gx-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-6">
+                        <form method="post" class="form">
+                            {% csrf_token %}
+                            {{ contact_form|crispy }}
+                            <button class="btn btn-primary" type="submit" name="contact_form">Submit</button>
+                        </form>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </section>
+        <footer class="footer bg-dark text-light text-center py-3">
+            <p>&copy; 2024 My Cooking Helper. All rights reserved.</p>
+            <a href="#" class="text-light">Privacy Policy</a> |
+            <a href="#" class="text-light">Terms of Service</a> |
+            <a href="#" class="text-light">Contact Us</a>
+            <div>
+                <a href="#" class="text-light me-2"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="text-light me-2"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="text-light"><i class="bi bi-instagram"></i></a>
+            </div>
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>
