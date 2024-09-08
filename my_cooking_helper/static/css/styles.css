@@ -275,3 +275,10 @@ body {
 .search-bar {
     padding: 40px;
 }
+.styled-button {
+    background-color: #7C93C3;
+    border-color: #7C93C3;
+}
+.styled-button:hover {
+    background-color: #9EB8D9;
+}
