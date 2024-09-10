@@ -22,14 +22,14 @@
                 <i class="bi bi-list" style="font-size: 48px; color: #7C93C3;"></i>
             </div>
             <div class="title-center playwrite-cu-title">My Cooking Helper</div>
-            <a href="#" class="btn btn-primary login-btn">Login</a>
+            <a href="{% url 'cooking_post:login_page' %}" class="btn btn-primary login-btn">Login</a>
         </div>
     <div id="sidebar" class="sidebar playwrite-cu-title">
         <div class="logo">&nbsp;My Cooking Helper</div>
-        <a class="sidebar-active" href="#">Home</a>
-        <a href="#">Recipes</a>
-        <a href="#">Dashboard</a>
-        <a href="#">Contact</a>
+        <a  href="{% url 'cooking_post:landing_page' %}">Home</a>
+        <a class="sidebar-active" href="{% url 'cooking_post:recipes' %}">Recipes</a>
+        <a href="{% url 'cooking_post:dashboard' %}">Dashboard</a>
+        <a href="{% url 'cooking_notifications:contact' %}">Contact</a>
     </div>
     </header>
 
@@ -105,7 +105,7 @@
             <p>&copy; 2024 My Cooking Helper. All rights reserved.</p>
             <a href="#">Privacy Policy</a>
             <a href="#">Terms of Service</a>
-            <a href="#">Contact Us</a>
+            <a href="{% url 'cooking_notifications:contact' %}">Contact Us</a>
             <div>
                 <a href="#"><i class="bi bi-facebook"></i></a>
                 <a href="#"><i class="bi bi-twitter"></i></a>

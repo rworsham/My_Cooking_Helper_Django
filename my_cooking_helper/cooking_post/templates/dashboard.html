@@ -18,10 +18,10 @@
 <body>
     <div id="sidebar" class="sidebar playwrite-cu-title">
         <div class="logo">My Cooking Helper</div>
-        <a href="#">Dashboard</a>
-        <a href="#">Recipes</a>
-        <a href="#">Blog</a>
-        <a href="#">Contact</a>
+        <a href="{% url 'cooking_post:landing_page' %}">Home</a>
+        <a href="{% url 'cooking_post:recipes' %}">Recipes</a>
+        <a class="sidebar-active" href="{% url 'cooking_post:dashboard' %}">Dashboard</a>
+        <a href="{% url 'cooking_notifications:contact' %}">Contact</a>
     </div>
     <div id="menu-toggle" class="menu-toggle">
         <i class="bi bi-list" style="font-size: 48px; color: #7C93C3;"></i>
@@ -87,7 +87,7 @@
             <p>&copy; 2024 My Cooking Helper. All rights reserved.</p>
             <a href="#">Privacy Policy</a>
             <a href="#">Terms of Service</a>
-            <a href="#">Contact Us</a>
+            <a href="{% url 'cooking_notifications:contact' %}">Contact Us</a>
             <div>
                 <a href="#"><i class="bi bi-facebook"></i></a>
                 <a href="#"><i class="bi bi-twitter"></i></a>

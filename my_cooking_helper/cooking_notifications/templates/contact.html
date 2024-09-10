@@ -28,10 +28,10 @@
     </header>
     <div id="sidebar" class="sidebar playwrite-cu-title">
         <div class="logo">&nbsp;My Cooking Helper</div>
-        <a href="#">Home</a>
-        <a href="#">Recipes</a>
-        <a href="#">Dashboard</a>
-        <a class="sidebar-active" href="#">Contact</a>
+        <a href="{% url 'cooking_post:landing_page' %}">Home</a>
+        <a href="{% url 'cooking_post:recipes' %}">Recipes</a>
+        <a  href="{% url 'cooking_post:dashboard' %}">Dashboard</a>
+        <a class="sidebar-active" href="{% url 'cooking_notifications:contact' %}">Contact</a>
     </div>
     <div id="main-content" class="main-content" style="padding-top: 60px;">
         <section class="hero-section" style="height: 100vh;">

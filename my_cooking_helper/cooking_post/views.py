@@ -46,6 +46,7 @@ def login_page(request):
         login_form = LoginForm()
         return render(request, "login.html", context)
 
+@login_required
 def dashboard(request):
     context = {}
     return render(request, "dashboard.html", context)
