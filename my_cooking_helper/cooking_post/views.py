@@ -19,6 +19,11 @@ def recipes(request):
     return render(request, "recipes.html", context)
 
 
+def sign_up(request):
+    context = {}
+    return render(request, "sign_up.html", context)
+
+
 def login_page(request):
     context = {"login_form": LoginForm()}
     if request.method == "POST":
