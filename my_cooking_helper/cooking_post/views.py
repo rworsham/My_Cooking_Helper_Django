@@ -6,7 +6,7 @@ from django.db.models import F, Q, Count
 from django.utils import timezone
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .forms import LoginForm
+from .forms import LoginForm, SignUpForm
 
 
 def landing_page(request):
@@ -20,8 +20,22 @@ def recipes(request):
 
 
 def sign_up(request):
-    context = {}
-    return render(request, "sign_up.html", context)
+    context = {"sign_up_form": SignUpForm()}
+    if request.method == "POST":
+        sign_up_form = SignUpForm(request.POST)
+        if "sign_up_form" in request.POST:
+            if not sign_up_form.is_valid():
+                print(sign_up_form.errors)
+                HttpResponseRedirect("#")
+            elif sign_up_form.is_valid():
+                name = sign_up_form.cleaned_data["name"]
+                email = sign_up_form.cleaned_data["email"]
+                password = sign_up_form.cleaned_data["password"]
+                HttpResponseRedirect('cooking_post:login_page')
+
+    else:
+        sign_up_form = SignUpForm()
+        return render(request, "sign_up.html", context)
 
 
 def login_page(request):
@@ -33,9 +47,9 @@ def login_page(request):
                 print(login_form.errors)
                 HttpResponseRedirect("#")
             elif login_form.is_valid():
-                username = login_form.cleaned_data["username"]
+                email = login_form.cleaned_data["email"]
                 password = login_form.cleaned_data["password"]
-                user = authenticate(request, username=username, password=password)
+                user = authenticate(request, email=email, password=password)
                 if user is not None:
                     login(request, user)
                     return redirect('cooking_post:dashboard')
