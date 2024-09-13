@@ -1,8 +1,6 @@
 from django import forms
 from django.forms import ModelForm
 from .validators import validate_email_does_not_exist
-from django.contrib.auth.models import User
-from django.core.exceptions import ValidationError
 from django.core.validators import EmailValidator
 from django_recaptcha.fields import ReCaptchaField
 
@@ -34,7 +32,3 @@ class SignUpForm(forms.Form):
         label="",
         required=True
     )
-
-    def validate_name_does_not_exist(value):
-        if not User.objects.filter(username=value).exists():
-            raise ValidationError(f'The name "{value}" does not exist in the User database.')
