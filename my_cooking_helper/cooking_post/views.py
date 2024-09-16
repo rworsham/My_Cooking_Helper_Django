@@ -18,6 +18,10 @@ def recipes(request):
     context = {}
     return render(request, "recipes.html", context)
 
+def featured_recipes(request):
+    context = {}
+    return render(request, "featured_recipes.html", context)
+
 
 def sign_up(request):
     context = {"sign_up_form": SignUpForm()}

@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
-    <meta name="author" content="Robert Worsham" />
+    <meta name="author" content="Your Name" />
     <title>My Cooking Helper</title>
     <link rel="icon" href="{% static 'assets/favicon.svg' %}" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,15 +22,15 @@
                 <i class="bi bi-list" style="font-size: 48px; color: #7C93C3;"></i>
             </div>
             <div class="title-center playwrite-cu-title">My Cooking Helper</div>
-            <a href="{% url 'cooking_post:login_page' %}" class="btn btn-primary login-btn">Login</a>
+            <a href="#" class="btn btn-primary login-btn">Login</a>
         </div>
     </header>
     <div id="sidebar" class="sidebar playwrite-cu-title">
         <div class="logo">&nbsp;My Cooking Helper</div>
         <a class="sidebar-active" href="#">Home</a>
-        <a href="{% url 'cooking_post:recipes' %}">Recipes</a>
-        <a href="{% url 'cooking_post:dashboard' %}">Dashboard</a>
-        <a href="{% url 'cooking_notifications:contact' %}">Contact</a>
+        <a href="#">Recipes</a>
+        <a href="#">Dashboard</a>
+        <a href="#">Contact</a>
     </div>
     <div id="main-content" class="main-content" style="padding-top: 60px;">
         <section class="hero-section">
@@ -40,39 +40,86 @@
                 <a href="#featured" class="cta-button">Explore Recipes</a>
             </div>
         </section>
-        <section id="featured" class="featured-section">
-            <div class="container">
-                <h2 class="playwrite-cu-title">Featured Recipes</h2>
+
+        <div class="container">
+            <section class="featured-section">
+                <h2 class="section-heading playwrite-cu-title">Section Title 1</h2>
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="featured-card">
-                            <img src="https://via.placeholder.com/300x200" alt="Recipe 1">
-                            <h3 class="playwrite-cu-subtitle">Recipe Title 1</h3>
-                            <p>A delicious recipe that you will love!</p>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <img src="https://via.placeholder.com/600x400" alt="Recipe 1">
+                            <h3 class="playwrite-cu-subtitle">Card Title 1</h3>
+                            <p>Card description goes here.</p>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="featured-card">
-                            <img src="https://via.placeholder.com/300x200" alt="Recipe 2">
-                            <h3 class="playwrite-cu-subtitle">Recipe Title 2</h3>
-                            <p>Another great recipe to try out.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="featured-card">
-                            <img src="https://via.placeholder.com/300x200" alt="Recipe 3">
-                            <h3 class="playwrite-cu-subtitle">Recipe Title 3</h3>
-                            <p>Perfect for your next meal.</p>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <img src="https://via.placeholder.com/600x400" alt="Recipe 2">
+                            <h3 class="playwrite-cu-subtitle">Card Title 2</h3>
+                            <p>Card description goes here.</p>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <img src="https://via.placeholder.com/600x400" alt="Recipe 3">
+                            <h3 class="playwrite-cu-subtitle">Card Title 3</h3>
+                            <p>Card description goes here.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <img src="https://via.placeholder.com/600x400" alt="Recipe 4">
+                            <h3 class="playwrite-cu-subtitle">Card Title 4</h3>
+                            <p>Card description goes here.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="featured-section">
+                <h2 class="section-heading playwrite-cu-title">Section Title 2</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <img src="https://via.placeholder.com/600x400" alt="Recipe 5">
+                            <h3 class="playwrite-cu-subtitle">Card Title 5</h3>
+                            <p>Card description goes here.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <img src="https://via.placeholder.com/600x400" alt="Recipe 6">
+                            <h3 class="playwrite-cu-subtitle">Card Title 6</h3>
+                            <p>Card description goes here.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <img src="https://via.placeholder.com/600x400" alt="Recipe 7">
+                            <h3 class="playwrite-cu-subtitle">Card Title 7</h3>
+                            <p>Card description goes here.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <img src="https://via.placeholder.com/600x400" alt="Recipe 8">
+                            <h3 class="playwrite-cu-subtitle">Card Title 8</h3>
+                            <p>Card description goes here.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
         <footer class="footer">
             <p>&copy; 2024 My Cooking Helper. All rights reserved.</p>
             <a href="#">Privacy Policy</a>
             <a href="#">Terms of Service</a>
-            <a href="{% url 'cooking_notifications:contact' %}">Contact Us</a>
+            <a href="#">Contact Us</a>
             <div>
                 <a href="#"><i class="bi bi-facebook"></i></a>
                 <a href="#"><i class="bi bi-twitter"></i></a>
