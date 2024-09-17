@@ -17,9 +17,10 @@
 </head>
 <body>
     <div id="sidebar" class="sidebar playwrite-cu-title">
-        <div class="logo">My Cooking Helper</div>
-        <a href="{% url 'cooking_post:landing_page' %}">Home</a>
-        <a href="{% url 'cooking_post:recipes' %}">Recipes</a>
+        <div class="logo">&nbsp;My Cooking Helper</div>
+        <a  href="{% url 'cooking_post:landing_page' %}">Home</a>
+        <a href="{% url 'cooking_post:featured_recipes' %}"> Featured Recipes</a>
+        <a href="{% url 'cooking_post:recipes' %}">All Recipes</a>
         <a class="sidebar-active" href="{% url 'cooking_post:dashboard' %}">Dashboard</a>
         <a href="{% url 'cooking_notifications:contact' %}">Contact</a>
     </div>

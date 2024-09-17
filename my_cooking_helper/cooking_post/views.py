@@ -65,6 +65,12 @@ def login_page(request):
         return render(request, "login.html", context)
 
 @login_required
+def logout_user(request):
+    logout(request)
+    return redirect("cooking_post:landing_page")
+
+
+@login_required
 def dashboard(request):
     context = {}
     return render(request, "dashboard.html", context)
