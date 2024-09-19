@@ -1,9 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, Http404, HttpResponseRedirect, JsonResponse
-from django.template import loader
-from django.urls import reverse
-from django.db.models import F, Q, Count
-from django.utils import timezone
+from django.contrib.auth.models import User
+from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, SignUpForm
@@ -32,9 +30,13 @@ def sign_up(request):
                 print(sign_up_form.errors)
                 HttpResponseRedirect("#")
             elif sign_up_form.is_valid():
-                name = sign_up_form.cleaned_data["name"]
-                email = sign_up_form.cleaned_data["email"]
-                password = sign_up_form.cleaned_data["password"]
+                new_user = User(
+                    username=sign_up_form.cleaned_data['email'],
+                    first_name=sign_up_form.cleaned_data['name'],
+                    email=sign_up_form.cleaned_data['email'],
+                    password=make_password(sign_up_form.cleaned_data['password'])
+                )
+                new_user.save()
                 HttpResponseRedirect('cooking_post:login_page')
 
     else:
@@ -43,26 +45,24 @@ def sign_up(request):
 
 
 def login_page(request):
-    context = {"login_form": LoginForm()}
     if request.method == "POST":
         login_form = LoginForm(request.POST)
-        if "login_request" in request.POST:
-            if not login_form.is_valid():
-                print(login_form.errors)
-                HttpResponseRedirect("#")
-            elif login_form.is_valid():
-                email = login_form.cleaned_data["email"]
-                password = login_form.cleaned_data["password"]
-                user = authenticate(request, email=email, password=password)
-                if user is not None:
-                    login(request, user)
-                    return redirect('cooking_post:dashboard')
-                else:
-                    print("user is none or incorrect creds")
-                    HttpResponseRedirect("#")
+        if login_form.is_valid():
+            email = login_form.cleaned_data["email"]
+            password = login_form.cleaned_data["password"]
+            user = authenticate(request, username=email, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('cooking_post:dashboard')
+            else:
+                print("Invalid email or password")
+                return render(request, "login.html", {"login_form": login_form, "error": "Invalid credentials."})
+        print(login_form.errors)
+        return render(request, "login.html", {"login_form": login_form})
     else:
         login_form = LoginForm()
-        return render(request, "login.html", context)
+    return render(request, "login.html", {"login_form": login_form})
+
 
 @login_required
 def logout_user(request):
