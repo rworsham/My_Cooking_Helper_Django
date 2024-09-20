@@ -1,3 +1,4 @@
+import random
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, Http404, HttpResponseRedirect, JsonResponse
 from django.contrib.auth.models import User
@@ -5,6 +6,7 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, SignUpForm
+from my_cooking_helper.cooking_data.models import Recipe
 
 
 def landing_page(request):
@@ -68,6 +70,12 @@ def login_page(request):
 def logout_user(request):
     logout(request)
     return redirect("cooking_post:landing_page")
+
+def get_random_recipes(num_recipes=7):
+    all_recipes = list(Recipe.objects.all())
+    num_recipes = min(num_recipes, len(all_recipes))
+    random_recipes = random.sample(all_recipes, num_recipes)
+    return random_recipes
 
 
 @login_required
