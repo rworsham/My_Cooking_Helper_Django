@@ -32,6 +32,7 @@
                 {{ login_form|crispy }}
                 <button class="btn btn-custom w-100" type="submit" name="login_request">Login</button>
             </form>
+            <a href="{% url 'cooking_post:sign_up' %}">Dont have an account? Sign up here!!</a>
         </div>
     </main>
     <footer class="footer">
