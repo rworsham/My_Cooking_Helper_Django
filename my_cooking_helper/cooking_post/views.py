@@ -6,8 +6,7 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, SignUpForm
-from my_cooking_helper.cooking_data.models import Recipe
-
+from cooking_data.models import Recipe
 
 def landing_page(request):
     context = {}

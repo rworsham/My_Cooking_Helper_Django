@@ -22,14 +22,14 @@ class Recipe(models.Model):
 class RecipeIngredient(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='ingredients')
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
-    quantity = models.DecimalField(max_digits=10, decimal_places=2)
-    unit = models.CharField(max_length=50)
+    quantity = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    unit = models.CharField(max_length=50, null=True, blank=True)
 
     class Meta:
         unique_together = ('recipe', 'ingredient')
 
     def __str__(self):
-        return f"{self.quantity} {self.unit} of {self.ingredient.name} in {self.recipe.name}"
+        return f"{self.quantity or 'N/A'} {self.unit or ''} of {self.ingredient.name} in {self.recipe.name}"
 
 class Category(models.Model):
     name = models.CharField(max_length=255, unique=True)
