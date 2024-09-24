@@ -294,3 +294,10 @@ body {
     margin-top: 30px;
     margin-bottom: 20px;
 }
+.no-decoration {
+    color: #333;
+    text-decoration: none;
+}
+.no-decoration a:hover {
+    text-decoration: underline;
+}

@@ -7,9 +7,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, SignUpForm
 from cooking_data.models import Recipe
+from cooking_data.utils import get_highest_rated_recipes
 
 def landing_page(request):
-    context = {}
+    context = {"featured_recipes": get_highest_rated_recipes()}
     return render(request, "landing_page.html", context)
 
 
@@ -17,8 +18,13 @@ def recipes(request):
     context = {}
     return render(request, "recipes.html", context)
 
+def recipe_detail(request, id):
+    recipe = get_object_or_404(Recipe, id=id)
+    context = {"recipe": recipe}
+    return render(request, "recipe_detail.html", context)
+
 def featured_recipes(request):
-    context = {}
+    context = {"featured_recipes": get_highest_rated_recipes()}
     return render(request, "featured_recipes.html", context)
 
 

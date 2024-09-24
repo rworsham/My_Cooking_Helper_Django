@@ -49,27 +49,21 @@
             <div class="container">
                 <h2 class="playwrite-cu-title">Featured Recipes</h2>
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="featured-card">
-                            <img src="https://via.placeholder.com/300x200" alt="Recipe 1">
-                            <h3 class="playwrite-cu-subtitle">Recipe Title 1</h3>
-                            <p>A delicious recipe that you will love!</p>
+                    {% for recipe in featured_recipes %}
+                        <div class="col-md-4">
+                            <div class="featured-card">
+                                <img src="https://via.placeholder.com/300x200" alt="{{ recipe.name }}">
+                                <h3 class="playwrite-cu-subtitle">
+                                    <a href="{% url 'cooking_post:recipe_detail' recipe.id %}" class="no-decoration">{{ recipe.name }}</a>
+                                </h3>
+                                <p>{{ recipe.description|default:"A delicious recipe that you will love!" }}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="featured-card">
-                            <img src="https://via.placeholder.com/300x200" alt="Recipe 2">
-                            <h3 class="playwrite-cu-subtitle">Recipe Title 2</h3>
-                            <p>Another great recipe to try out.</p>
+                    {% empty %}
+                        <div class="col-md-12">
+                            <p>No featured recipes available at the moment.</p>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="featured-card">
-                            <img src="https://via.placeholder.com/300x200" alt="Recipe 3">
-                            <h3 class="playwrite-cu-subtitle">Recipe Title 3</h3>
-                            <p>Perfect for your next meal.</p>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </section>
