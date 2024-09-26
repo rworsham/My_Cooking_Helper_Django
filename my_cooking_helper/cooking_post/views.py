@@ -6,7 +6,7 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, SignUpForm
-from cooking_data.models import Recipe
+from cooking_data.models import Recipe, Rating
 from cooking_data.utils import get_highest_rated_recipes
 
 def landing_page(request):
@@ -20,8 +20,22 @@ def recipes(request):
 
 def recipe_detail(request, id):
     recipe = get_object_or_404(Recipe, id=id)
-    context = {"recipe": recipe}
-    return render(request, "recipe_detail.html", context)
+    existing_rating = Rating.objects.filter(user=request.user, recipe=recipe).first()
+    if request.method == 'POST':
+        score = request.POST.get('score')
+        Rating.objects.update_or_create(
+            user=request.user,
+            recipe=recipe,
+            defaults={'score': score}
+        )
+        return HttpResponseRedirect(request.path)
+
+    context = {
+        'recipe': recipe,
+        'existing_rating': existing_rating,
+    }
+
+    return render(request, 'recipe_detail.html', context)
 
 def featured_recipes(request):
     context = {"featured_recipes": get_highest_rated_recipes()}

@@ -301,3 +301,14 @@ body {
 .no-decoration a:hover {
     text-decoration: underline;
 }
+.star-rating {
+    display: inline-block;
+}
+.star-rating .fa-star {
+    font-size: 24px;
+    color: #7C93C3;
+    cursor: pointer;
+}
+.star-rating .fa-star.checked {
+    color: #e2b13c;
+}
