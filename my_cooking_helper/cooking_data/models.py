@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Create your models here.
 class Ingredient(models.Model):
@@ -66,15 +67,19 @@ class RecipeTag(models.Model):
 class Rating(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='ratings')
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='ratings')
-    score = models.IntegerField()
+    score = models.IntegerField(
+        validators=[
+            MinValueValidator(0),
+            MaxValueValidator(5)
+        ]
+    )
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         unique_together = ('user', 'recipe')
 
     def __str__(self):
-        return f"{self.user.name} rated {self.recipe.name} with a score of {self.score}"
-
+        return f"{self.user.username} rated {self.recipe.name} with a score of {self.score}"
 
 class Favorite(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='favorites')
@@ -85,4 +90,4 @@ class Favorite(models.Model):
         unique_together = ('user', 'recipe')
 
     def __str__(self):
-        return f"{self.user.name} favorited {self.recipe.name}"
+        return f"{self.user.username} favorited {self.recipe.name}"

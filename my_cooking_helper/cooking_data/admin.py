@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Ingredient, RecipeIngredient, Recipe, RecipeTag, RecipeCategory, Category, Tag
+from .models import Ingredient, RecipeIngredient, Recipe, RecipeTag, RecipeCategory, Category, Tag, Rating, Favorite
 
 class RecipeIngredientInline(admin.TabularInline):
     model = RecipeIngredient
@@ -42,6 +42,18 @@ class RecipeTagAdmin(admin.ModelAdmin):
     list_display = ('recipe', 'tag')
     search_fields = ('recipe__name', 'tag__name')
 
+class RatingAdmin(admin.ModelAdmin):
+    list_display = ('user', 'recipe', 'score', 'created_at')
+    search_fields = ('user__username', 'recipe__name')
+    list_filter = ('created_at', 'score')
+    ordering = ('-created_at',)
+
+class FavoriteAdmin(admin.ModelAdmin):
+    list_display = ('user', 'recipe', 'created_at')
+    search_fields = ('user__username', 'recipe__name')
+    list_filter = ('created_at',)
+    ordering = ('-created_at',)
+
 admin.site.register(Ingredient, IngredientAdmin)
 admin.site.register(Recipe, RecipeAdmin)
 admin.site.register(RecipeIngredient, RecipeIngredientAdmin)
@@ -49,3 +61,5 @@ admin.site.register(Category, CategoryAdmin)
 admin.site.register(RecipeCategory, RecipeCategoryAdmin)
 admin.site.register(Tag, TagAdmin)
 admin.site.register(RecipeTag, RecipeTagAdmin)
+admin.site.register(Rating,RatingAdmin)
+admin.site.register(Favorite, FavoriteAdmin)

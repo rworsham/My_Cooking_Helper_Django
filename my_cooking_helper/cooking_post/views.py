@@ -10,7 +10,7 @@ from cooking_data.models import Recipe
 from cooking_data.utils import get_highest_rated_recipes
 
 def landing_page(request):
-    context = {"featured_recipes": get_highest_rated_recipes()}
+    context = {"featured_recipes": get_highest_rated_recipes(limit=3)}
     return render(request, "landing_page.html", context)
 
 
