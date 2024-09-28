@@ -38,15 +38,15 @@
     </div>
     </header>
 
-    <!-- Search Bar -->
     <div class="container mt-4 search-bar">
         <div class="row">
             <div class="col-md-8 mx-auto">
-                <input type="text" class="form-control" placeholder="Search recipes..." aria-label="Search recipes">
+                <form method="GET" action="{% url 'cooking_post:search_recipes' %}">
+                    <input type="text" name="q" class="form-control" placeholder="Search recipes..." aria-label="Search recipes" required>
+                </form>
             </div>
         </div>
     </div>
-
     <div id="main-content" class="main-content" style="padding-top: 20px;">
         <section class="featured-section">
             <div class="container">

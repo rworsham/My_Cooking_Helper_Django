@@ -20,6 +20,7 @@ def recipes(request):
 
 def recipe_detail(request, id):
     recipe = get_object_or_404(Recipe, id=id)
+    instructions = recipe.instructions.splitlines()
     existing_rating = Rating.objects.filter(user=request.user, recipe=recipe).first()
     if request.method == 'POST':
         score = request.POST.get('score')
@@ -33,6 +34,7 @@ def recipe_detail(request, id):
     context = {
         'recipe': recipe,
         'existing_rating': existing_rating,
+        'instructions': instructions
     }
 
     return render(request, 'recipe_detail.html', context)
@@ -40,6 +42,13 @@ def recipe_detail(request, id):
 def featured_recipes(request):
     context = {"featured_recipes": get_highest_rated_recipes()}
     return render(request, "featured_recipes.html", context)
+
+def search_recipes(request):
+    query = request.GET.get('q')
+    results = []
+    if query and len(query) < 80:
+        results = Recipe.objects.filter(name__icontains=query)
+    return render(request, 'search_recipes.html', {'results': results, 'query': query})
 
 
 def sign_up(request):

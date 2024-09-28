@@ -58,11 +58,20 @@
         <h2 class="mt-4">Ingredients</h2>
         <ul>
             {% for ingredient in recipe.ingredients.all %}
-                <li>{{ ingredient.quantity }} {{ ingredient.unit }} of {{ ingredient.ingredient.name }}</li>
+                <li>{{ ingredient.ingredient.name }}</li>
             {% empty %}
                 <li>No ingredients found.</li>
             {% endfor %}
         </ul>
+
+        <h2 class="mt-4">Instructions</h2>
+            <ul>
+                {% for step in instructions %}
+                    <li>{{ step }}</li>
+                {% empty %}
+                    <li>No instructions available.</li>
+                {% endfor %}
+            </ul>
 
         <div class="mt-4 text-center">
             <h2>Rate This Recipe</h2>

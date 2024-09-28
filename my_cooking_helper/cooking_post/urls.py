@@ -11,5 +11,6 @@ urlpatterns = [
     path("recipes", views.recipes, name="recipes"),
     path("recipe_detail/<int:id>", views.recipe_detail, name="recipe_detail"),
     path("featured_recipes", views.featured_recipes, name="featured_recipes"),
-    path("sign_up", views.sign_up, name="sign_up")
+    path("sign_up", views.sign_up, name="sign_up"),
+    path('search/', views.search_recipes, name='search_recipes'),
 ]
