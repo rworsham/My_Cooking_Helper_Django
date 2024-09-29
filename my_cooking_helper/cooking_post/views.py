@@ -6,8 +6,8 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, SignUpForm
-from cooking_data.models import Recipe, Rating
-from cooking_data.utils import get_highest_rated_recipes
+from cooking_data.models import Recipe, Rating, Category
+from cooking_data.utils import get_highest_rated_recipes, get_highest_rated_recipes_per_category
 
 def landing_page(request):
     context = {"featured_recipes": get_highest_rated_recipes(limit=3)}
@@ -40,7 +40,7 @@ def recipe_detail(request, id):
     return render(request, 'recipe_detail.html', context)
 
 def featured_recipes(request):
-    context = {"featured_recipes": get_highest_rated_recipes()}
+    context = {"featured_recipes": get_highest_rated_recipes(), 'category_recipes': get_highest_rated_recipes_per_category()}
     return render(request, "featured_recipes.html", context)
 
 def search_recipes(request):

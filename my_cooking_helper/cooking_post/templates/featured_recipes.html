@@ -47,77 +47,23 @@
         </section>
 
         <div class="container">
+            {% for category_name, recipes in category_recipes.items %}
             <section class="featured-section">
-                <h2 class="section-heading playwrite-cu-title">Section Title 1</h2>
+                <h2 class="section-heading playwrite-cu-title">{{ category_name }}</h2>
                 <div class="row">
+                    {% for recipe in recipes %}
                     <div class="col-md-6">
                         <div class="card">
-                            <img src="https://via.placeholder.com/600x400" alt="Recipe 1">
-                            <h3 class="playwrite-cu-subtitle">Card Title 1</h3>
-                            <p>Card description goes here.</p>
+                            <img src="{{ recipe.image_url }}" alt="{{ recipe.name }}">
+                            <h3 class="playwrite-cu-subtitle">{{ recipe.name }}</h3>
+                            <p>{{ recipe.description }}</p>
+                            <p><strong>Average Rating:</strong> {{ recipe.average_rating|floatformat:1 }}</p>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="card">
-                            <img src="https://via.placeholder.com/600x400" alt="Recipe 2">
-                            <h3 class="playwrite-cu-subtitle">Card Title 2</h3>
-                            <p>Card description goes here.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card">
-                            <img src="https://via.placeholder.com/600x400" alt="Recipe 3">
-                            <h3 class="playwrite-cu-subtitle">Card Title 3</h3>
-                            <p>Card description goes here.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card">
-                            <img src="https://via.placeholder.com/600x400" alt="Recipe 4">
-                            <h3 class="playwrite-cu-subtitle">Card Title 4</h3>
-                            <p>Card description goes here.</p>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </section>
-            <section class="featured-section">
-                <h2 class="section-heading playwrite-cu-title">Section Title 2</h2>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card">
-                            <img src="https://via.placeholder.com/600x400" alt="Recipe 5">
-                            <h3 class="playwrite-cu-subtitle">Card Title 5</h3>
-                            <p>Card description goes here.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card">
-                            <img src="https://via.placeholder.com/600x400" alt="Recipe 6">
-                            <h3 class="playwrite-cu-subtitle">Card Title 6</h3>
-                            <p>Card description goes here.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card">
-                            <img src="https://via.placeholder.com/600x400" alt="Recipe 7">
-                            <h3 class="playwrite-cu-subtitle">Card Title 7</h3>
-                            <p>Card description goes here.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card">
-                            <img src="https://via.placeholder.com/600x400" alt="Recipe 8">
-                            <h3 class="playwrite-cu-subtitle">Card Title 8</h3>
-                            <p>Card description goes here.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
+            {% endfor %}
         </div>
 
         <footer class="footer">
