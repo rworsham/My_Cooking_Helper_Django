@@ -38,14 +38,6 @@
         <a href="{% url 'cooking_notifications:contact' %}">Contact</a>
     </div>
     <div id="main-content" class="main-content" style="padding-top: 60px;">
-        <section class="hero-section">
-            <div>
-                <h1 class="playwrite-cu-title">Welcome to My Cooking Helper</h1>
-                <p>Discover delicious recipes and cooking tips.</p>
-                <a href="#featured" class="cta-button">Explore Recipes</a>
-            </div>
-        </section>
-
         <div class="container">
             {% for category_name, recipes in category_recipes.items %}
             <section class="featured-section">
@@ -54,10 +46,11 @@
                     {% for recipe in recipes %}
                     <div class="col-md-6">
                         <div class="card">
-                            <img src="{{ recipe.image_url }}" alt="{{ recipe.name }}">
-                            <h3 class="playwrite-cu-subtitle">{{ recipe.name }}</h3>
+                            <h3 class="playwrite-cu-subtitle">
+                                <a href="{% url 'cooking_post:recipe_detail' recipe.id %}" class="no-decoration">{{ recipe.name }}</a>
+                            </h3>
                             <p>{{ recipe.description }}</p>
-                            <p><strong>Average Rating:</strong> {{ recipe.average_rating|floatformat:1 }}</p>
+                            <p>Average Rating: {{ recipe.average_rating|floatformat:1 }}</p>
                         </div>
                     </div>
                     {% endfor %}

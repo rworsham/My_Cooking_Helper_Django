@@ -182,6 +182,16 @@ body {
     max-width: 100%;
     border-radius: 10px;
 }
+.featured-card-uniform {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 .footer {
     background-color: #9EB8D9;
     color: #FFFFFF;
@@ -311,4 +321,7 @@ body {
 }
 .star-rating .fa-star.checked {
     color: #e2b13c;
+}
+.pagination {
+    margin-top: 20px;
 }
