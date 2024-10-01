@@ -16,6 +16,7 @@ class Recipe(models.Model):
     instructions = models.TextField()
     preparation_time = models.DurationField(null=True, blank=True)
     cooking_time = models.DurationField(null=True, blank=True)
+    image_url = models.URLField(max_length=200, blank=True)
 
     def __str__(self):
         return self.name
