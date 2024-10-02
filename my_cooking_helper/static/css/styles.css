@@ -325,3 +325,13 @@ body {
 .pagination {
     margin-top: 20px;
 }
+.bordered-image {
+    border: 2px solid #7C93C3;
+    max-width: 100%;
+    height: auto;
+}
+.center-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

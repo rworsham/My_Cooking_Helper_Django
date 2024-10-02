@@ -52,7 +52,9 @@
                     {% for recipe in featured_recipes %}
                         <div class="col-md-4">
                             <div class="featured-card">
-                                <img src="https://via.placeholder.com/300x200" alt="{{ recipe.name }}">
+                                <div class="center-img">
+                                    <img class="rounded bordered-image" src="{{ recipe.image_url }}" alt="Picture of {{ recipe.name }}" width="300" height="200">
+                                </div>
                                 <h3 class="playwrite-cu-subtitle">
                                     <a href="{% url 'cooking_post:recipe_detail' recipe.id %}" class="no-decoration">{{ recipe.name }}</a>
                                 </h3>

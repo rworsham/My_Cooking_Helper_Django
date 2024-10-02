@@ -46,6 +46,9 @@
                     {% for recipe in recipes %}
                     <div class="col-md-6">
                         <div class="card">
+                            <div class="center-img">
+                                <img class="rounded bordered-image" src="{{ recipe.image_url }}" alt="Picture of {{ recipe.name }}" width="300" height="200">
+                            </div>
                             <h3 class="playwrite-cu-subtitle">
                                 <a href="{% url 'cooking_post:recipe_detail' recipe.id %}" class="no-decoration">{{ recipe.name }}</a>
                             </h3>

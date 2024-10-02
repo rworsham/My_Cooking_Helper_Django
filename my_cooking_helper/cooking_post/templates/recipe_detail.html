@@ -43,7 +43,9 @@
         <h1 class="playwrite-cu-title">{{ recipe.name }}</h1>
         <div class="row">
             <div class="col-md-6">
-                <img src="https://via.placeholder.com/500x300" alt="{{ recipe.name }}" class="img-fluid">
+                <div class="center-img">
+                    <img class="rounded bordered-image" src="{{ recipe.image_url }}" alt="Picture of {{ recipe.name }}" width="500" height="300">
+                </div>
             </div>
             <div class="col-md-6">
                 <h3>Description</h3>
