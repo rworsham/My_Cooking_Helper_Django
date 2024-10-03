@@ -18,7 +18,6 @@ def landing_page(request):
 def recipes(request):
     recipe_list = Recipe.objects.all()
     paginator = Paginator(recipe_list, 18)
-
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -58,7 +57,6 @@ def search_recipes(request):
     if query and len(query) < 80:
         results = Recipe.objects.filter(name__icontains=query)
     return render(request, 'search_recipes.html', {'results': results, 'query': query})
-
 
 def sign_up(request):
     context = {"sign_up_form": SignUpForm()}
