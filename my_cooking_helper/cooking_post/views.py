@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from collections import defaultdict
 from .forms import LoginForm, SignUpForm
 from cooking_data.models import Recipe, Rating, Category
 from cooking_data.utils import get_highest_rated_recipes, get_highest_rated_recipes_per_category
@@ -115,5 +116,16 @@ def get_random_recipes(num_recipes=7):
 
 @login_required
 def dashboard(request):
-    context = {}
+    random_recipes = get_random_recipes()
+    shopping_list = defaultdict(float)
+
+    for recipe in random_recipes:
+        for recipe_ingredient in recipe.ingredients.all():
+            ingredient_name = recipe_ingredient.ingredient.name
+            quantity = recipe_ingredient.quantity or 0
+            shopping_list[ingredient_name] += quantity
+    context = {
+        "weekly_ideas": random_recipes,
+        "shopping_list": shopping_list.items(),
+    }
     return render(request, "dashboard.html", context)

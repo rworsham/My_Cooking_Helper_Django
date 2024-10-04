@@ -18,8 +18,8 @@
 <body>
     <div id="sidebar" class="sidebar playwrite-cu-title">
         <div class="logo">&nbsp;My Cooking Helper</div>
-        <a  href="{% url 'cooking_post:landing_page' %}">Home</a>
-        <a href="{% url 'cooking_post:featured_recipes' %}"> Featured Recipes</a>
+        <a href="{% url 'cooking_post:landing_page' %}">Home</a>
+        <a href="{% url 'cooking_post:featured_recipes' %}">Featured Recipes</a>
         <a href="{% url 'cooking_post:recipes' %}">All Recipes</a>
         <a class="sidebar-active" href="{% url 'cooking_post:dashboard' %}">Dashboard</a>
         <a href="{% url 'cooking_notifications:contact' %}">Contact</a>
@@ -52,34 +52,39 @@
                     </div>
 
                     <div class="box-container">
-                        <div class="box current-day">
-                            <h5>Today</h5>
-                            <p id="day-0"></p>
+                        <h2>Weekly Recipe Ideas</h2>
+                        <div class="row">
+                            {% for recipe in weekly_ideas %}
+                                <div class="col-md-4">
+                                    <div class="box">
+                                        <h5>{{ recipe.name }}</h5>
+                                        <p>{{ recipe.description }}</p>
+                                        <p><strong>Preparation Time:</strong> {{ recipe.preparation_time }}</p>
+                                        <p><strong>Cooking Time:</strong> {{ recipe.cooking_time }}</p>
+                                        {% if recipe.image_url %}
+                                        <div class="center-img">
+                                            <img class="rounded bordered-image" src="{{ recipe.image_url }}" alt="Picture of {{ recipe.name }}" width="300" height="200">
+                                        </div>
+                                        {% endif %}
+                                        <a href="{% url 'cooking_post:recipe_detail' recipe.id %}" class="btn btn-primary mt-2">View Recipe</a>
+                                    </div>
+                                </div>
+                            {% empty %}
+                                <p>No recipes available at the moment.</p>
+                            {% endfor %}
                         </div>
-                        <div class="box">
-                            <h5>Day 1</h5>
-                            <p id="day-1"></p>
-                        </div>
-                        <div class="box">
-                            <h5>Day 2</h5>
-                            <p id="day-2"></p>
-                        </div>
-                        <div class="box">
-                            <h5>Day 3</h5>
-                            <p id="day-3"></p>
-                        </div>
-                        <div class="box">
-                            <h5>Day 4</h5>
-                            <p id="day-4"></p>
-                        </div>
-                        <div class="box">
-                            <h5>Day 5</h5>
-                            <p id="day-5"></p>
-                        </div>
-                        <div class="box">
-                            <h5>Day 6</h5>
-                            <p id="day-6"></p>
-                        </div>
+                    </div>
+                    <div class="box-container">
+                        <h2>Shopping List</h2>
+                        <ul class="list-group">
+                            {% for ingredient, quantity in shopping_list %}
+                                <li class="list-group-item">
+                                    {{ ingredient }}: {{ quantity }}
+                                </li>
+                            {% empty %}
+                                <li class="list-group-item">No ingredients available for the selected recipes.</li>
+                            {% endfor %}
+                        </ul>
                     </div>
                 </div>
             </div>
