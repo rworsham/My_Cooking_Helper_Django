@@ -9,7 +9,8 @@ from django.contrib.auth.decorators import login_required
 from collections import defaultdict
 from .forms import LoginForm, SignUpForm
 from cooking_data.models import Recipe, Rating, Category
-from cooking_data.utils import get_highest_rated_recipes, get_highest_rated_recipes_per_category
+from cooking_data.utils import get_highest_rated_recipes, get_highest_rated_recipes_per_category, generate_pdf, get_random_recipes
+
 
 def landing_page(request):
     context = {"featured_recipes": get_highest_rated_recipes(limit=3)}
@@ -26,6 +27,7 @@ def recipes(request):
         'page_obj': page_obj,
     }
     return render(request, "recipes.html", context)
+
 
 def recipe_detail(request, id):
     recipe = get_object_or_404(Recipe, id=id)
@@ -48,9 +50,11 @@ def recipe_detail(request, id):
 
     return render(request, 'recipe_detail.html', context)
 
+
 def featured_recipes(request):
     context = {"featured_recipes": get_highest_rated_recipes(), 'category_recipes': get_highest_rated_recipes_per_category()}
     return render(request, "featured_recipes.html", context)
+
 
 def search_recipes(request):
     query = request.GET.get('q')
@@ -58,6 +62,7 @@ def search_recipes(request):
     if query and len(query) < 80:
         results = Recipe.objects.filter(name__icontains=query)
     return render(request, 'search_recipes.html', {'results': results, 'query': query})
+
 
 def sign_up(request):
     context = {"sign_up_form": SignUpForm()}
@@ -107,16 +112,21 @@ def logout_user(request):
     logout(request)
     return redirect("cooking_post:landing_page")
 
-def get_random_recipes(num_recipes=7):
-    all_recipes = list(Recipe.objects.all())
-    num_recipes = min(num_recipes, len(all_recipes))
-    random_recipes = random.sample(all_recipes, num_recipes)
-    return random_recipes
-
 
 @login_required
 def dashboard(request):
-    random_recipes = get_random_recipes()
+    if request.GET.get('randomize') == 'true':
+        random_recipes = get_random_recipes()
+        request.session['random_recipes'] = [recipe.id for recipe in random_recipes]
+        return redirect('cooking_post:dashboard')
+
+    recipe_ids = request.session.get('random_recipes')
+    if recipe_ids:
+        random_recipes = Recipe.objects.filter(id__in=recipe_ids)
+    else:
+        random_recipes = get_random_recipes()
+        request.session['random_recipes'] = [recipe.id for recipe in random_recipes]
+
     shopping_list = defaultdict(float)
 
     for recipe in random_recipes:
@@ -124,6 +134,13 @@ def dashboard(request):
             ingredient_name = recipe_ingredient.ingredient.name
             quantity = recipe_ingredient.quantity or 0
             shopping_list[ingredient_name] += quantity
+
+    if request.GET.get('pdf') == 'true':
+        pdf = generate_pdf(shopping_list.items())
+        response = HttpResponse(pdf, content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="shopping_list.pdf"'
+        return response
+
     context = {
         "weekly_ideas": random_recipes,
         "shopping_list": shopping_list.items(),

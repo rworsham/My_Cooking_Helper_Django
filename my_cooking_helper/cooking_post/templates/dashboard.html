@@ -53,6 +53,10 @@
 
                     <div class="box-container">
                         <h2>Weekly Recipe Ideas</h2>
+                        <form method="get" action="{% url 'cooking_post:dashboard' %}">
+                            <input type="hidden" name="randomize" value="true">
+                            <button type="submit">Randomize Recipes</button>
+                        </form>
                         <div class="row">
                             {% for recipe in weekly_ideas %}
                                 <div class="col-md-4">
@@ -76,10 +80,11 @@
                     </div>
                     <div class="box-container">
                         <h2>Shopping List</h2>
+                        <a href="{% url 'cooking_post:dashboard' %}?pdf=true">Download Shopping List as PDF</a>
                         <ul class="list-group">
                             {% for ingredient, quantity in shopping_list %}
                                 <li class="list-group-item">
-                                    {{ ingredient }}: {{ quantity }}
+                                    {{ ingredient }}
                                 </li>
                             {% empty %}
                                 <li class="list-group-item">No ingredients available for the selected recipes.</li>
