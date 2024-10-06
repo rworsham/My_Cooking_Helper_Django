@@ -38,12 +38,13 @@
                 <div class="col-md-12">
                     <div class="box-container top-boxes">
                         <div class="box">
-                            <h5>Box 1</h5>
-                            <p>Content for box 1</p>
+                        <form method="get" action="{% url 'cooking_post:dashboard' %}">
+                            <input type="hidden" name="randomize" value="true">
+                            <button type="submit" class="btn btn-primary login-btn">Randomize Recipes</button>
+                        </form>
                         </div>
                         <div class="box">
-                            <h5>Box 2</h5>
-                            <p>Content for box 2</p>
+                            <a href="{% url 'cooking_post:dashboard' %}?pdf=true" class="btn btn-primary login-btn">Download Shopping List as PDF</a>
                         </div>
                         <div class="box">
                             <h5>Box 3</h5>
@@ -53,10 +54,6 @@
 
                     <div class="box-container">
                         <h2>Weekly Recipe Ideas</h2>
-                        <form method="get" action="{% url 'cooking_post:dashboard' %}">
-                            <input type="hidden" name="randomize" value="true">
-                            <button type="submit">Randomize Recipes</button>
-                        </form>
                         <div class="row">
                             {% for recipe in weekly_ideas %}
                                 <div class="col-md-4">

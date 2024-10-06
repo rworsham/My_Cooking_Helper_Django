@@ -335,3 +335,8 @@ body {
     justify-content: center;
     align-items: center;
 }
+box .login-btn {
+    margin-left: auto;
+    background-color: #7C93C3;
+    border-color: #7C93C3;
+}
