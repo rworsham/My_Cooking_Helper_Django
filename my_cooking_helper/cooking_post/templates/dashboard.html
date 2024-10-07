@@ -54,39 +54,48 @@
 
                     <div class="box-container">
                         <h2>Weekly Recipe Ideas</h2>
-                        <div class="row">
-                            {% for recipe in weekly_ideas %}
-                                <div class="col-md-4">
-                                    <div class="box">
-                                        <h5>{{ recipe.name }}</h5>
-                                        <p>{{ recipe.description }}</p>
-                                        <p><strong>Preparation Time:</strong> {{ recipe.preparation_time }}</p>
-                                        <p><strong>Cooking Time:</strong> {{ recipe.cooking_time }}</p>
-                                        {% if recipe.image_url %}
-                                        <div class="center-img">
-                                            <img class="rounded bordered-image" src="{{ recipe.image_url }}" alt="Picture of {{ recipe.name }}" width="300" height="200">
+                            <div class="row">
+                                {% for recipe in weekly_ideas %}
+                                    <div class="col-md-4{% if forloop.counter == 7 %} offset-md-4{% endif %}">
+                                        <div class="box text-center mb-4">
+                                            {% if recipe.image_url %}
+                                            <div class="center-img mb-3">
+                                                <img class="rounded bordered-image" src="{{ recipe.image_url }}" alt="Picture of {{ recipe.name }}" width="300" height="200">
+                                            </div>
+                                            {% endif %}
+                                            <h5 class="mt-2">{{ recipe.name }}</h5>
+                                            <p class="mb-2">{{ recipe.description }}</p>
+                                            <p><strong>Preparation Time:</strong> {{ recipe.preparation_time }}</p>
+                                            <p><strong>Cooking Time:</strong> {{ recipe.cooking_time }}</p>
+                                            <a href="{% url 'cooking_post:recipe_detail' recipe.id %}" class="btn btn-primary mt-3">View Recipe</a>
                                         </div>
-                                        {% endif %}
-                                        <a href="{% url 'cooking_post:recipe_detail' recipe.id %}" class="btn btn-primary mt-2">View Recipe</a>
                                     </div>
-                                </div>
-                            {% empty %}
-                                <p>No recipes available at the moment.</p>
-                            {% endfor %}
-                        </div>
+                                {% empty %}
+                                    <div class="col-12 text-center">
+                                        <p>No recipes available at the moment.</p>
+                                    </div>
+                                {% endfor %}
+                            </div>
                     </div>
                     <div class="box-container">
                         <h2>Shopping List</h2>
-                        <a href="{% url 'cooking_post:dashboard' %}?pdf=true">Download Shopping List as PDF</a>
-                        <ul class="list-group">
-                            {% for ingredient, quantity in shopping_list %}
-                                <li class="list-group-item">
-                                    {{ ingredient }}
-                                </li>
-                            {% empty %}
-                                <li class="list-group-item">No ingredients available for the selected recipes.</li>
-                            {% endfor %}
-                        </ul>
+                            <div class="row">
+                                {% for ingredient, quantity in shopping_list %}
+                                    <div class="col-md-6">
+                                        <ul class="list-group">
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                {{ ingredient }}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                {% empty %}
+                                    <div class="col-12">
+                                        <ul class="list-group">
+                                            <li class="list-group-item text-center">No ingredients available for the selected recipes.</li>
+                                        </ul>
+                                    </div>
+                                {% endfor %}
+                            </div>
                     </div>
                 </div>
             </div>

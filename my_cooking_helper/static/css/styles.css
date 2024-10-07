@@ -43,6 +43,10 @@ body {
     align-items: center;
     height: 78vh;
 }
+.centered {
+    display: flex;
+    justify-content: center;
+}
 .login-box {
     background: #FFFFFF;
     padding: 2rem;
