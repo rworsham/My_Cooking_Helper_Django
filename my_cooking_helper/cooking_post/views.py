@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from collections import defaultdict
 from .forms import LoginForm, SignUpForm
-from cooking_data.models import Recipe, Rating, Category
+from cooking_data.models import Recipe, Rating, Category, RecipeCategory
 from cooking_data.utils import get_highest_rated_recipes, get_highest_rated_recipes_per_category, generate_pdf, get_random_recipes
 
 
@@ -57,11 +57,18 @@ def featured_recipes(request):
 
 
 def search_recipes(request):
-    query = request.GET.get('q')
-    results = []
+    query = request.GET.get('q', '').strip()
+    category = request.GET.get('category', '')
+    results = Recipe.objects.all()
     if query and len(query) < 80:
-        results = Recipe.objects.filter(name__icontains=query)
-    return render(request, 'search_recipes.html', {'results': results, 'query': query})
+        results = results.filter(name__icontains=query)
+    if category:
+        try:
+            category_obj = Category.objects.get(name=category)
+            results = results.filter(categories__category=category_obj).distinct()
+        except Category.DoesNotExist:
+            results = Recipe.objects.none()
+    return render(request, 'search_recipes.html', {'results': results, 'query': query, 'category': category})
 
 
 def sign_up(request):

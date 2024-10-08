@@ -21,18 +21,18 @@
             <div id="menu-toggle" class="menu-toggle">
                 <i class="bi bi-list" style="font-size: 48px; color: #7C93C3;"></i>
             </div>
-            <div class="title-center playwrite-cu-title">My Cooking Helper</div>
+            <div class="title-center playwrite-cu-title" style="color: #7C93C3;">My Cooking Helper</div>
             {% if request.user.is_authenticated %}
-            <a href="{% url 'cooking_post:logout_user' %}" class="btn btn-primary login-btn">Logout</a>
+            <a href="{% url 'cooking_post:logout_user' %}" class="btn btn-custom login-btn">Logout</a>
             {% else %}
-            <a href="{% url 'cooking_post:login_page' %}"  class="btn btn-primary login-btn">Login</a>
+            <a href="{% url 'cooking_post:login_page' %}" class="btn btn-custom login-btn">Login</a>
             {% endif %}
         </div>
     </header>
     <div id="sidebar" class="sidebar playwrite-cu-title">
-        <div class="logo">&nbsp;My Cooking Helper</div>
-        <a class="sidebar-active"  href="{% url 'cooking_post:landing_page' %}">Home</a>
-        <a href="{% url 'cooking_post:featured_recipes' %}"> Featured Recipes</a>
+        <div class="logo" style="color: #FFFFFF;">&nbsp;My Cooking Helper</div>
+        <a class="sidebar-active" href="{% url 'cooking_post:landing_page' %}">Home</a>
+        <a href="{% url 'cooking_post:featured_recipes' %}">Featured Recipes</a>
         <a href="{% url 'cooking_post:recipes' %}">All Recipes</a>
         <a href="{% url 'cooking_post:dashboard' %}">Dashboard</a>
         <a href="{% url 'cooking_notifications:contact' %}">Contact</a>
@@ -41,7 +41,7 @@
         <section class="hero-section">
             <div>
                 <h1 class="playwrite-cu-title">Welcome to My Cooking Helper</h1>
-                <p>Discover delicious recipes and cooking tips.</p>
+                <p style="color: #7C93C3;">Discover delicious recipes and cooking tips.</p>
                 <a href="#featured" class="cta-button">Explore Recipes</a>
             </div>
         </section>
@@ -56,7 +56,7 @@
                                     <img class="rounded bordered-image" src="{{ recipe.image_url }}" alt="Picture of {{ recipe.name }}" width="300" height="200">
                                 </div>
                                 <h3 class="playwrite-cu-subtitle">
-                                    <a href="{% url 'cooking_post:recipe_detail' recipe.id %}" class="no-decoration">{{ recipe.name }}</a>
+                                    <a href="{% url 'cooking_post:recipe_detail' recipe.id %}" class="no-decoration" style="color: #7C93C3;">{{ recipe.name }}</a>
                                 </h3>
                                 <p>{{ recipe.description|default:"A delicious recipe that you will love!" }}</p>
                             </div>
@@ -71,13 +71,13 @@
         </section>
         <footer class="footer">
             <p>&copy; 2024 My Cooking Helper. All rights reserved.</p>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <a href="{% url 'cooking_notifications:contact' %}">Contact Us</a>
+            <a href="#" style="color: #FFFFFF;">Privacy Policy</a>
+            <a href="#" style="color: #FFFFFF;">Terms of Service</a>
+            <a href="{% url 'cooking_notifications:contact' %}" style="color: #FFFFFF;">Contact Us</a>
             <div>
-                <a href="#"><i class="bi bi-facebook"></i></a>
-                <a href="#"><i class="bi bi-twitter"></i></a>
-                <a href="#"><i class="bi bi-instagram"></i></a>
+                <a href="#"><i class="bi bi-facebook" style="color: #FFFFFF;"></i></a>
+                <a href="#"><i class="bi bi-twitter" style="color: #FFFFFF;"></i></a>
+                <a href="#"><i class="bi bi-instagram" style="color: #FFFFFF;"></i></a>
             </div>
         </footer>
     </div>

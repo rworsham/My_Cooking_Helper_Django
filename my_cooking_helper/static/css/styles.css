@@ -257,8 +257,7 @@ body {
 }
 .header .login-btn {
     margin-left: auto;
-    background-color: #7C93C3;
-    border-color: #7C93C3;
+
 }
 .title-center {
     flex: 1;
@@ -267,6 +266,8 @@ body {
 }
 .login-btn {
     margin-left: auto;
+    background-color: #7C93C3;
+    border-color: #7C93C3;
 }
 .login-btn:hover {
     background-color: #9EB8D9;
@@ -343,4 +344,8 @@ box .login-btn {
     margin-left: auto;
     background-color: #7C93C3;
     border-color: #7C93C3;
+}
+.select-small {
+    flex: 0 0 25%;
+    max-width: 25%;
 }

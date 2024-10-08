@@ -37,17 +37,31 @@
             <a href="{% url 'cooking_notifications:contact' %}">Contact</a>
         </div>
     </header>
-
     <div class="container mt-4 search-bar">
         <div class="row">
             <div class="col-md-8 mx-auto">
                 <form method="GET" action="{% url 'cooking_post:search_recipes' %}">
-                    <input type="text" name="q" class="form-control" placeholder="Search recipes..." aria-label="Search recipes" required>
+                    <div class="input-group mb-3">
+                        <input type="text" name="q" class="form-control" placeholder="Search recipes..." aria-label="Search recipes" required>
+                            <select name="category" class="form-select select-small">
+                                <option value="">All Categories</option>
+                                <option value="Sauces and Condiments">Sauces and Condiments</option>
+                                <option value="Breads and Rolls">Breads and Rolls</option>
+                                <option value="Desserts">Desserts</option>
+                                <option value="Breakfast and Brunch<">Breakfast and Brunch</option>
+                                <option value="Casseroles and Bakes">Casseroles and Bakes</option>
+                                <option value="Side Dishes">Side Dishes</option>
+                                <option value="Main Dishes">Main Dishes</option>
+                                <option value="Soups and Stews">Soups and Stews</option>
+                                <option value="Salads">Salads</option>
+                                <option value="Appetizers and Snacks">Appetizers and Snacks</option>
+                            </select>
+                        <button class="btn login-btn" type="submit">Search</button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
-
     <div id="main-content" class="main-content" style="padding-top: 20px;">
         <section class="search-results-section">
             <div class="container">
