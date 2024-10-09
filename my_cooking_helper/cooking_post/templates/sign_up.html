@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="Robert Worsham" />
-    <title>Log In</title>
+    <title>Sign Up</title> <!-- Changed title -->
     <link rel="icon" href="{% static 'assets/favicon.svg' %}" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,6 +16,11 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
+    <header class="header">
+        <div class="container">
+            <div class="title-center playwrite-cu-title" style="color: #7C93C3;">My Cooking Helper</div>
+        </div>
+    </header>
     {% load crispy_forms_tags %}
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
@@ -26,12 +31,13 @@
     </nav>
     <main class="center bg-custom-light">
         <div class="login-box">
-            <h2 class="playwrite-cu-title">Login</h2>
+            <h2 class="playwrite-cu-title">Sign Up</h2>
             <form method="POST">
                 {% csrf_token %}
-                {{ login_form|crispy }}
-                <button class="btn btn-custom w-100" type="submit" name="login_request">Login</button>
+                {{ sign_up_form|crispy }}
+                <button class="btn btn-primary login-btn w-100" type="submit" name="signup_request">Sign Up</button>
             </form>
+            <a href="{% url 'cooking_post:login_page' %}" class="sign-up">Already have an account? Log in here!</a>
         </div>
     </main>
     <footer class="footer">

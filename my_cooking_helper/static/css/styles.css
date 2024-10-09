@@ -333,7 +333,6 @@ body {
 .bordered-image {
     border: 2px solid #7C93C3;
     max-width: 100%;
-    height: auto;
 }
 .center-img {
     display: flex;
@@ -348,4 +347,8 @@ box .login-btn {
 .select-small {
     flex: 0 0 25%;
     max-width: 25%;
+}
+.sign-up {
+    margin: auto;
+    text-align: center;
 }

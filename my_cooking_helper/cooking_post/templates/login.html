@@ -16,6 +16,11 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
+    <header class="header">
+        <div class="container">
+            <div class="title-center playwrite-cu-title" style="color: #7C93C3;">My Cooking Helper</div>
+        </div>
+    </header>
     {% load crispy_forms_tags %}
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
@@ -30,9 +35,9 @@
             <form method="POST">
                 {% csrf_token %}
                 {{ login_form|crispy }}
-                <button class="btn btn-custom w-100" type="submit" name="login_request">Login</button>
+                <button class="btn btn-primary login-btn w-100" type="submit" name="login_request">Login</button>
             </form>
-            <a href="{% url 'cooking_post:sign_up' %}">Dont have an account? Sign up here!!</a>
+            <a href="{% url 'cooking_post:sign_up' %}" class="sign-up">Dont have an account? Sign up here!!</a>
         </div>
     </main>
     <footer class="footer">
