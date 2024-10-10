@@ -37,7 +37,7 @@
         <a href="{% url 'cooking_post:dashboard' %}">Dashboard</a>
         <a href="{% url 'cooking_notifications:contact' %}">Contact</a>
     </div>
-    <div id="main-content" class="main-content" style="padding-top: 60px;">
+    <div id="main-content" class="main-content bg-custom-light" style="padding-top: 60px;">
         <div class="container">
             {% for category_name, recipes in category_recipes.items %}
             <section class="featured-section">

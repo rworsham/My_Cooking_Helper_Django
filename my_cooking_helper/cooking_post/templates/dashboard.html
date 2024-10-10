@@ -47,8 +47,7 @@
                             <a href="{% url 'cooking_post:dashboard' %}?pdf=true" class="btn btn-primary login-btn">Download Shopping List as PDF</a>
                         </div>
                         <div class="box">
-                            <h5>Box 3</h5>
-                            <p>Content for box 3</p>
+                            <a href="{% url 'cooking_post:dashboard' %}?pdf=true" class="btn btn-primary login-btn">Favorites List</a>
                         </div>
                     </div>
 
@@ -67,7 +66,7 @@
                                             <p class="mb-2">{{ recipe.description }}</p>
                                             <p><strong>Preparation Time:</strong> {{ recipe.preparation_time }}</p>
                                             <p><strong>Cooking Time:</strong> {{ recipe.cooking_time }}</p>
-                                            <a href="{% url 'cooking_post:recipe_detail' recipe.id %}" class="btn btn-primary mt-3">View Recipe</a>
+                                            <a href="{% url 'cooking_post:recipe_detail' recipe.id %}" class="btn btn-primary login-btn mt-3">View Recipe</a>
                                         </div>
                                     </div>
                                 {% empty %}

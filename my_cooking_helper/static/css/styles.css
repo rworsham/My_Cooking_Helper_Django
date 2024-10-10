@@ -303,7 +303,6 @@ body {
 }
 .card img {
     max-width: 100%;
-    height: auto;
 }
 .section-heading {
     margin-top: 30px;
@@ -351,4 +350,13 @@ box .login-btn {
 .sign-up {
     margin: auto;
     text-align: center;
+}
+.favorite-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.icon-large {
+    font-size: 3rem;
+    color: #A25772;
 }
