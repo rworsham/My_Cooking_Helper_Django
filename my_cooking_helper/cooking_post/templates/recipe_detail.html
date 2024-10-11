@@ -42,11 +42,11 @@
     <div class="container mt-4" style="padding-top: 60px;">
         <div class="favorite-container">
             <h1 class="playwrite-cu-title">{{ recipe.name }}</h1>
-            <form method="POST" class="favorite-form">
+            <form id="favoriteForm" method="POST" class="favorite-form">
                 {% csrf_token %}
-                <input type="hidden" name="favorite" id="favorite" value="{% if favorite %}un_favorite{% else %}favorite{% endif %}">
+                <input type="hidden" name="favorite" id="favorite" value="{% if existing_favorite %}un_favorite{% else %}favorite{% endif %}">
                 <div class="favorite">
-                    <span class="{% if favorite %}bi bi-heart-fill icon-large{% else %}bi bi-heart icon-large{% endif %}" data-value="{{ favorite }}"></span>
+                    <span class="{% if existing_favorite %}bi bi-heart-fill icon-large{% else %}bi bi-heart icon-large{% endif %}" data-value="{{ favorite }}"></span>
                 </div>
                 <button type="submit" class="btn btn-primary mt-2" style="display: none;">Favorite</button>
             </form>
@@ -87,7 +87,7 @@
 
         <div class="mt-4 text-center">
             <h2>Rate This Recipe</h2>
-            <form method="POST">
+            <form id="ratingForm" method="POST">
                 {% csrf_token %}
                 <input type="hidden" name="score" id="rating-score" value="{% if existing_rating %}{{ existing_rating.score }}{% else %}0{% endif %}">
                 <div class="star-rating">

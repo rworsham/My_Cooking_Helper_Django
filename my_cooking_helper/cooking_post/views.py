@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from collections import defaultdict
 from .forms import LoginForm, SignUpForm
-from cooking_data.models import Recipe, Rating, Category, RecipeCategory
+from cooking_data.models import Recipe, Rating, Category, RecipeCategory, Favorite
 from cooking_data.utils import get_highest_rated_recipes, get_highest_rated_recipes_per_category, generate_pdf, get_random_recipes
 
 
@@ -33,18 +33,28 @@ def recipe_detail(request, id):
     recipe = get_object_or_404(Recipe, id=id)
     instructions = recipe.instructions.splitlines()
     existing_rating = Rating.objects.filter(user=request.user, recipe=recipe).first()
+    existing_favorite = Favorite.objects.filter(user=request.user, recipe=recipe).exists()
     if request.method == 'POST':
         score = request.POST.get('score')
-        Rating.objects.update_or_create(
-            user=request.user,
-            recipe=recipe,
-            defaults={'score': score}
-        )
+        favorite_action = request.POST.get('favorite')
+        if score:
+            Rating.objects.update_or_create(
+                user=request.user,
+                recipe=recipe,
+                defaults={'score': score}
+            )
+        if favorite_action:
+            if existing_favorite:
+                Favorite.objects.filter(user=request.user, recipe=recipe).delete()
+            else:
+                Favorite.objects.create(user=request.user, recipe=recipe)
+
         return HttpResponseRedirect(request.path)
 
     context = {
         'recipe': recipe,
         'existing_rating': existing_rating,
+        'existing_favorite': existing_favorite,
         'instructions': instructions
     }
 

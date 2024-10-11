@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const stars = document.querySelectorAll('.star-rating span');
     const ratingInput = document.getElementById('rating-score');
-    const form = document.querySelector('form');
+    const form = document.querySelector('ratingForm');
 
     stars.forEach(star => {
         star.addEventListener('click', () => {
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            form.submit();
+            ratingForm.submit();
         });
     });
 });

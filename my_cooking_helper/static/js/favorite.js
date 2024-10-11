@@ -14,6 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
             favoriteIcon.classList.add('bi-heart-fill');
         }
 
-        form.submit();
+        favoriteForm.submit();
     });
 });
