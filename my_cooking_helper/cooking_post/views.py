@@ -171,3 +171,17 @@ def dashboard(request):
         "shopping_list": shopping_list.items(),
     }
     return render(request, "dashboard.html", context)
+
+
+@login_required
+def favorites(request):
+    user = request.user
+    favorite_list = Favorite.objects.filter(user=user).select_related('recipe')
+    recipe_list = [favorite.recipe for favorite in favorite_list]
+    paginator = Paginator(recipe_list, 18)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {
+        'page_obj': page_obj,
+    }
+    return render(request, "favorites.html", context)
