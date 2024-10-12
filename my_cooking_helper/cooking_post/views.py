@@ -1,6 +1,6 @@
 import random
 from django.core.paginator import Paginator
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.http import HttpResponse, Http404, HttpResponseRedirect, JsonResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password, check_password
@@ -32,24 +32,29 @@ def recipes(request):
 def recipe_detail(request, id):
     recipe = get_object_or_404(Recipe, id=id)
     instructions = recipe.instructions.splitlines()
-    existing_rating = Rating.objects.filter(user=request.user, recipe=recipe).first()
-    existing_favorite = Favorite.objects.filter(user=request.user, recipe=recipe).exists()
-    if request.method == 'POST':
-        score = request.POST.get('score')
-        favorite_action = request.POST.get('favorite')
-        if score:
-            Rating.objects.update_or_create(
-                user=request.user,
-                recipe=recipe,
-                defaults={'score': score}
-            )
-        if favorite_action:
-            if existing_favorite:
-                Favorite.objects.filter(user=request.user, recipe=recipe).delete()
-            else:
-                Favorite.objects.create(user=request.user, recipe=recipe)
-
-        return HttpResponseRedirect(request.path)
+    existing_rating = None
+    existing_favorite = False
+    if request.user.is_authenticated:
+        existing_rating = Rating.objects.filter(user=request.user, recipe=recipe).first()
+        existing_favorite = Favorite.objects.filter(user=request.user, recipe=recipe).exists()
+        if request.method == 'POST':
+            score = request.POST.get('score')
+            favorite_action = request.POST.get('favorite')
+            if score:
+                Rating.objects.update_or_create(
+                    user=request.user,
+                    recipe=recipe,
+                    defaults={'score': score}
+                )
+            if favorite_action:
+                if existing_favorite:
+                    Favorite.objects.filter(user=request.user, recipe=recipe).delete()
+                else:
+                    Favorite.objects.create(user=request.user, recipe=recipe)
+            return HttpResponseRedirect(request.path)
+    else:
+        if request.method == 'POST':
+            return HttpResponseRedirect(reverse('cooking_post:login_page') + '?next=' + request.path)
 
     context = {
         'recipe': recipe,
@@ -98,13 +103,13 @@ def sign_up(request):
                 )
                 new_user.save()
                 HttpResponseRedirect('cooking_post:login_page')
-
     else:
         sign_up_form = SignUpForm()
         return render(request, "sign_up.html", context)
 
 
 def login_page(request):
+    next_url = request.GET.get('next')
     if request.method == "POST":
         login_form = LoginForm(request.POST)
         if login_form.is_valid():
@@ -113,6 +118,8 @@ def login_page(request):
             user = authenticate(request, username=email, password=password)
             if user is not None:
                 login(request, user)
+                if next_url:
+                    return redirect(next_url)
                 return redirect('cooking_post:dashboard')
             else:
                 print("Invalid email or password")
@@ -121,6 +128,7 @@ def login_page(request):
         return render(request, "login.html", {"login_form": login_form})
     else:
         login_form = LoginForm()
+
     return render(request, "login.html", {"login_form": login_form})
 
 
