@@ -86,6 +86,23 @@ def search_recipes(request):
     return render(request, 'search_recipes.html', {'results': results, 'query': query, 'category': category})
 
 
+@login_required()
+def search_favorite_recipes(request):
+    user = request.user
+    query = request.GET.get('q', '').strip()
+    category = request.GET.get('category', '')
+    results = Favorite.objects.filter(user=user).select_related('recipe')
+    if query and len(query) < 80:
+        results = results.filter(recipe__name__icontains=query)
+    if category:
+        try:
+            category_obj = Category.objects.get(name=category)
+            results = results.filter(categories__category=category_obj).distinct()
+        except Category.DoesNotExist:
+            results = Recipe.objects.none()
+    return render(request, 'search_favorite_recipes.html', {'results': results, 'query': query, 'category': category})
+
+
 def sign_up(request):
     context = {"sign_up_form": SignUpForm()}
     if request.method == "POST":
