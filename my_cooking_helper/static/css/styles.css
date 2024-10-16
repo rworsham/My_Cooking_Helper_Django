@@ -360,3 +360,15 @@ box .login-btn {
     font-size: 3rem;
     color: #A25772;
 }
+.landing-section {
+    height: auto;
+    background-color: #EEF5FF !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 0;
+}
+.text-blue {
+    color: #7C93C3;
+}
