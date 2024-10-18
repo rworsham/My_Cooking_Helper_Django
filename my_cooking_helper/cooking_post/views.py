@@ -52,6 +52,17 @@ def recipe_detail(request, id):
                 else:
                     Favorite.objects.create(user=request.user, recipe=recipe)
             return HttpResponseRedirect(request.path)
+        if request.GET.get('pdf') == 'true':
+            shopping_list = defaultdict(float)
+            for recipe_ingredient in recipe.ingredients.all():
+                ingredient_name = recipe_ingredient.ingredient.name
+                quantity = recipe_ingredient.quantity or 0
+                shopping_list[ingredient_name] += quantity
+
+            pdf = generate_pdf(shopping_list.items())
+            response = HttpResponse(pdf, content_type='application/pdf')
+            response['Content-Disposition'] = 'attachment; filename="shopping_list.pdf"'
+            return response
     else:
         if request.method == 'POST':
             return HttpResponseRedirect(reverse('cooking_post:login_page') + '?next=' + request.path)

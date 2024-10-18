@@ -78,6 +78,7 @@
                 <li>No ingredients found.</li>
             {% endfor %}
         </ul>
+        <a href="{% url 'cooking_post:recipe_detail' recipe.id %}?pdf=true" class="btn btn-primary login-btn">Download Shopping List as PDF</a>
 
         <h2 class="mt-4">Instructions</h2>
             <ul>
